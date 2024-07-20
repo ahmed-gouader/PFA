@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diaporama</title>
+    <style>
+        .slider {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 600px;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+        .iframe-container {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1;
+            border-radius: 50%;
+        }
+        .prev {
+            left: 0;
+        }
+        .next {
+            right: 0;
+        }
+        .round{
+          width:20px;
+          height:20px;
+          border-radius:50%;
+          position:relative;
+          background:red;
+          display:inline-block;
+          padding:0.3rem 0.2rem !important;
+          margin:0.3rem 0.2rem !important;
+          left:-18px;
+          top:10px;
+          z-index: 99 !important;
+        }
+        .round > span {
+          color:white;
+          display:block;
+          text-align:center;
+          font-size:1rem !important;
+          padding:0 !important;
+        }
+        #list{
+         
+          display: none;
+          top: 33px;
+          position: absolute;
+          right: 2%;
+          background:#ffffff;
+  z-index:100 !important;
+    width: 25vw;
+    margin-left: -37px;
+   
+    padding:0 !important;
+    margin:0 auto !important;
+    
+          
+        }
+        .message > span {
+           width:100%;
+           display:block;
+           color:red;
+           text-align:justify;
+           margin:0.2rem 0.3rem !important;
+           padding:0.3rem !important;
+           line-height:1rem !important;
+           font-weight:bold;
+           border-bottom:1px solid rgb(10, 6, 6);
+           font-size:1.8rem !important;
+
+        }
+        .message{
+          /* background:#ff7f50;
+          margin:0.3rem 0.2rem !important;
+          padding:0.2rem 0 !important;
+          width:100%;
+          display:block; */
+          
+        }
+        .message > .msg {
+           width:90%;
+           margin:0.2rem 0.3rem !important;
+           padding:0.2rem 0.2rem !important;
+           text-align:justify;
+           font-weight:bold;
+           display:block;
+           word-wrap: break-word;
+         
+          
+        }
+       
+    </style>
+</head>
+<body>
+
+<div class="slider">
+    <div class="slides">
+        <div class="iframe-container">
+            <iframe src="https://ourworldindata.org/explorers/natural-disasters?facet=none&country=~TUN&hideControls=true&Disaster+Type=All+disasters&Impact=Deaths&Timespan=Annual&Per+capita=false&tab=chart" loading="lazy" style="width: 100%; height: 100%; border: 0px none;" allow="web-share; clipboard-write"></iframe>
+        </div>
+        <div class="iframe-container">
+            <iframe src="https://ourworldindata.org/grapher/natural-disasters-by-type?tab=chart" loading="lazy" style="width: 100%; height: 100%; border: 0px none;" allow="web-share; clipboard-write"></iframe>
+        </div>
+    </div>
+    <button class="prev" onclick="pslide()">P</button>
+    <button class="next" onclick="sslide()">S</button>
+</div>
+
+<script>
+    let slideIndex = 0;
+
+    function showSlides() {
+        const slides = document.querySelectorAll('.iframe-container');
+        if (slideIndex >= slides.length) {
+            slideIndex = 0;
+        }
+        if (slideIndex < 0) {
+            slideIndex = slides.length - 1;
+        }
+        slides.forEach(slide => {
+            slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+        });
+    }
+
+    function sslide() {
+        slideIndex++;
+        showSlides();
+    }
+
+    function pslide() {
+        slideIndex--;
+        showSlides();
+    }
+
+    showSlides();
+</script>
+
+</body>
+</html>

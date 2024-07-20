@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carte de la Tunisie</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialise la carte centrée sur la Tunisie
+    var map = L.map('map').setView([34, 9], 6);
+
+    // Ajoute une couche de tuiles OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Définit les styles pour remplir et contourner la Tunisie
+    var countryStyle = {
+      fillColor: 'green', // Couleur de remplissage
+      fillOpacity: 0.4,    // Opacité de remplissage
+      color: 'black',      // Couleur de contour
+      weight: 2            // Épaisseur du contour
+    };
+
+    // Charge les données GeoJSON de la Tunisie
+    fetch('tunisia.geojson')
+      .then(response => response.json())
+      .then(data => {
+        L.geoJSON(data, {
+          style: countryStyle // Applique les styles à la couche GeoJSON
+        }).addTo(map);
+      })
+      .catch(error => console.error('Erreur lors du chargement des données GeoJSON de la Tunisie :', error));
+  </script>
+</body>
+</html>

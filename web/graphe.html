@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphique des catastrophes naturelles en temps réel</title>
+    <!-- Inclure la bibliothèque Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Div contenant l'élément canvas pour le graphique -->
+    <div>
+        <canvas id="realTimeChart"></canvas>
+    </div>
+
+    <!-- Script JavaScript pour créer et mettre à jour le graphique en temps réel -->
+    <script>
+        // Fonction pour récupérer les données des catastrophes naturelles depuis l'API GDACS
+        async function fetchDisasterData() {
+            try {
+                const response = await fetch('https://api.gdacs.org/GetAllDisasters');
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la récupération des données depuis l\'API GDACS');
+                }
+                const data = await response.json();
+                // Filtrer les données pour ne récupérer que les catastrophes naturelles récentes
+                const recentDisasters = data.filter(disaster => new Date(disaster.start) >= new Date() - 24 * 60 * 60 * 1000);
+                return recentDisasters;
+            } catch (error) {
+                console.error('Une erreur s\'est produite :', error);
+            }
+        }
+
+        // Fonction pour mettre à jour le graphique en temps réel avec les données des catastrophes naturelles
+        async function updateRealTimeChart() {
+            const disasterData = await fetchDisasterData();
+            const disasterTypes = {};
+            disasterData.forEach(disaster => {
+                const type = disaster.eventType;
+                disasterTypes[type] = (disasterTypes[type] || 0) + 1;
+            });
+            const labels = Object.keys(disasterTypes);
+            const data = Object.values(disasterTypes);
+            const ctx = document.getElementById('realTimeChart').getContext('2d');
+            if (window.myChart) {
+                window.myChart.destroy(); // Détruire le graphique existant pour éviter les doublons
+            }
+            window.myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Occurrences de catastrophes',
+                        data: data,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Mettre à jour le graphique en temps réel toutes les X secondes (par exemple toutes les 30 secondes)
+        setInterval(updateRealTimeChart, 30000);
+        
+        // Initialiser le graphique au chargement de la page
+        updateRealTimeChart();
+    </script>
+</body>
+</html>

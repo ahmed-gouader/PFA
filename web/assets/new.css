@@ -1,0 +1,174 @@
+     
+    .round > span {
+          color:white;
+          display:block;
+      
+          font-size:1rem !important;
+          padding:0 !important;
+        }
+        #list{
+         
+          display: none;
+          top: 33px;
+          position: absolute;
+          right: 2%;
+          background:#ffffff;
+  z-index:100 !important;
+    width: 25vw;
+    margin-left: -37px;
+   
+    padding:0 !important;
+    margin:0 auto !important;
+    
+          
+        }
+        .message > span {
+           width:100%;
+           height:auto;
+           display:block;
+           color:red;
+           text-align:justify;
+           margin:0.2rem 0.3rem !important;
+           padding:0.3rem !important;
+           line-height:1rem !important;
+           font-weight:bold;
+           border-bottom:1px solid white;
+           font-size:1.8rem !important;
+
+        }
+        .message{
+          background:#ff7f50;
+          margin:0.3rem 0.2rem !important;
+          padding:0.2rem 0 !important;
+          width:100%;
+          height:auto;
+          display:block; 
+          
+        }
+        .message > .msg {
+           width:90%;
+           height:auto;
+           margin:0.2rem 0.3rem !important;
+           padding:0.2rem 0.2rem !important;
+           text-align:justify;
+           font-weight:bold;
+           display:block;
+           word-wrap: break-word;
+         
+          
+        }
+
+/* Styles pour le badge rond contenant le nombre de notifications */
+.round {
+    background-color: red; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    border-radius: 50%; /* Pour rendre le badge rond */
+    padding: 0.2rem 0.5rem; /* Ajustez selon vos besoins */
+    position: absolute; /* Position absolue par rapport au conteneur parent */
+    top: 1px;
+
+}
+/* Style pour le titre des réalisations */
+.achievement-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+ text-align: center;
+}
+
+/* Style pour le conteneur des réalisations */
+
+
+/* Style pour les colonnes des réalisations */
+.achievement-col {
+    margin-bottom: 20px;
+}
+
+/* Style pour les cartes des réalisations */
+.achievement-card {
+    width: 350px;
+    height: 500px;
+    margin-top: 20px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+
+}
+
+/* Style pour les titres des cartes */
+.achievement-card-title {
+    font-size: 1.5rem;
+    margin-top: 5px;
+    
+}
+
+/* Style pour les textes des cartes */
+.achievement-card-text {
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+/* Style pour les images des cartes */
+.achievement-card-img-top {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+/* Style pour les boutons des cartes */
+/* Style pour les boutons des cartes */
+/* Style pour les boutons des cartes */
+/* Style pour les boutons des cartes */
+
+
+/* Effet au survol des boutons des cartes */
+.achievement-btn:hover {
+    background-color: #007B91;
+}
+
+/* Centrer les cartes dans la grille */
+.achievement-container {
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+ 
+ border-radius: 10px;
+ /* Centrer horizontalement */
+}
+/* Style pour les cartes des réalisations */
+.achievement-card {
+    width: 350px;
+    height:auto;
+    margin-top: 20px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    border-radius: 10px;
+}
+
+/* Style pour les corps des cartes */
+.achievement-card-body {
+    padding: 20px;
+    margin-top: auto; /* Pousser les boutons vers le bas */
+}
+
+/* Style pour les boutons des cartes */
+.achievement-btn {
+
+    padding: 10px 20px;
+    border-radius: 0;
+    text-decoration: none;
+    background-color: #0197AF;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+   border-radius: 10px;
+   margin-left: 85%;
+}
+
+/* Effet au survol des boutons des cartes */
+.achievement-btn:hover {
+    background-color: #007B91;
+}

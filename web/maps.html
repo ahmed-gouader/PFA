@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="navbar.css">
+<title>MAPS-PIRGCN</title>
+<link rel="icon" href="img/treasure-map.png">
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+</head>
+<body data-rsssl=1>
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+crossorigin=""/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+crossorigin=""></script>
+<style>
+#map { 
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1; /* Ensure map is behind other elements */
+}
+.footer {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+  padding: 10px;
+}
+</style>
+<main>
+<div id="map"></div>
+<div class="footer">
+    <a href="index.php">
+        <span class="icon">
+            <img src="img/world.png">
+        </span>
+        </a>
+</div>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"></script>
+
+<script>
+const map = L.map('map'); 
+// Initializes map
+map.setView([51.505, -0.09], 13); 
+// Sets initial coordinates and zoom level
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+maxZoom: 19,
+attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map); 
+// Sets map data source and associates with map
+let marker, circle, zoomed;
+navigator.geolocation.watchPosition(success, error);
+function success(pos) {
+const lat = pos.coords.latitude;
+const lng = pos.coords.longitude;
+const accuracy = pos.coords.accuracy;
+if (marker) {
+map.removeLayer(marker);
+map.removeLayer(circle);
+}
+// Removes any existing marker and circle (new ones about to be set)
+marker = L.marker([lat, lng]).addTo(map);
+circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
+// Adds marker to the map and a circle for accuracy
+if (!zoomed) {
+zoomed = map.fitBounds(circle.getBounds()); 
+}
+// Set zoom to boundaries of accuracy circle
+map.setView([lat, lng]);
+// Set map focus to current user position
+}
+function error(err) {
+if (err.code === 1) {
+alert("Please allow geolocation access");
+} else {
+alert("Cannot get current location");
+}
+}
+</script>
+  
+</body>
+</html>
